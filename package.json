@@ -31,12 +31,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kumavis/irc-tx-summary.git"
+    "url": "git+https://github.com/AuraMask/irc-tx-summary.git"
   },
   "bugs": {
-    "url": "https://github.com/kumavis/irc-tx-summary/issues"
+    "url": "https://github.com/AuraMask/irc-tx-summary/issues"
   },
-  "homepage": "https://github.com/kumavis/irc-tx-summary#readme",
+  "homepage": "https://github.com/AuraMask/irc-tx-summary#readme",
   "keywords": [
     "irchain"
   ]
