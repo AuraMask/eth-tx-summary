@@ -7,7 +7,8 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -67,3 +68,10 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# JetBrains IDE temporary
+.idea
+
+# Dependencies lock files
+package-lock.json
+yarn.lock

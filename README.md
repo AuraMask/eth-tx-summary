@@ -1,5 +1,5 @@
-### eth-tx-summary
-replay a historical tx using a web3 provider as a data source
+### irc-tx-summary
+replay a historical tx using a webu provider as a data source
 
 ```js
 generateTxSummary(provider, targetTx, function(err, summary){

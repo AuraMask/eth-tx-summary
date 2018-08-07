@@ -1,47 +1,46 @@
-const async = require('async')
-const ethUtil = require('ethereumjs-util')
-const ConcatStream = require('concat-stream')
-const lookupOpInfo = require('./opCodes')
-const createVmTraceStream = require('./index').createVmTraceStream
+const async = require('async');
+const ircUtil = require('icjs-util');
+const ConcatStream = require('concat-stream');
+const lookupOpInfo = require('./opCodes');
+const createVmTraceStream = require('./index').createVmTraceStream;
 
-module.exports = traceTx
-
+module.exports = traceTx;
 
 function traceTx(provider, txHash, cb) {
-  const traceStream = createVmTraceStream(provider, txHash)
-  traceStream.on('error', (err) => cb(err) )
-  const concatStream = ConcatStream({ encoding: 'object' }, function(vmOutput){
-    const result = parseVmOutput(vmOutput)
-    cb(null, result)
-  })
-  traceStream.pipe(concatStream)
+  const traceStream = createVmTraceStream(provider, txHash);
+  traceStream.on('error', (err) => cb(err));
+  const concatStream = ConcatStream({encoding: 'object'}, function(vmOutput) {
+    const result = parseVmOutput(vmOutput);
+    cb(null, result);
+  });
+  traceStream.pipe(concatStream);
 }
 
 function parseVmOutput(vmOutput) {
-  const txParams = vmOutput.find(datum => datum.type === 'tx').data
-  const txResults = vmOutput.find(datum => datum.type === 'results').data
+  const txParams = vmOutput.find(datum => datum.type === 'tx').data;
+  const txResults = vmOutput.find(datum => datum.type === 'results').data;
   const traceSteps = vmOutput
-    .filter(datum => datum.type === 'step')
-    .map(datum => datum.data)
+      .filter(datum => datum.type === 'step')
+      .map(datum => datum.data);
   const structLogs = traceSteps
-    .map((step, index) => {
-      const nextStep = traceSteps[index+1]
-      const nextGasBn = nextStep ? nextStep.gasLeft : txResults.vm.gas
-      const gasUsedBn = step.gasLeft.sub(nextGasBn)
-      return formatStep(step, gasUsedBn)
-    })
+      .map((step, index) => {
+        const nextStep = traceSteps[index + 1];
+        const nextGasBn = nextStep ? nextStep.gasLeft : txResults.vm.gas;
+        const gasUsedBn = step.gasLeft.sub(nextGasBn);
+        return formatStep(step, gasUsedBn);
+      });
 
   return {
     failed: !txResults.vm.exception,
     gas: txResults.gasUsed.toNumber(),
     returnValue: txResults.vm.return.toString('hex'),
     structLogs,
-  }
+  };
 }
 
 function formatStep(step, gasUsedBn) {
-  const opInfo = step.opcode
-  const cleanMemory = step.memory.filter(entry => entry !== 'undefined')
+  const opInfo = step.opcode;
+  const cleanMemory = step.memory.filter(entry => entry !== 'undefined');
 
   return {
     depth: step.depth + 1,
@@ -55,11 +54,11 @@ function formatStep(step, gasUsedBn) {
     stack: formatMemory(step.stack),
     // storage: not available
     storage: {},
-  }
+  };
 }
 
 function formatMemory(memory) {
-  return memory.map(entry => ethUtil.setLengthLeft(entry, 32).toString('hex'))
+  return memory.map(entry => ircUtil.setLengthLeft(entry, 32).toString('hex'));
 }
 
 // {

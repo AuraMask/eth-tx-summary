@@ -1,5 +1,5 @@
 const async = require('async')
-const { bufferToHex, bufferToInt, setLengthLeft } = require('ethereumjs-util')
+const { bufferToHex, bufferToInt, setLengthLeft } = require('icjs-util')
 const endOfStream = require('end-of-stream')
 const through = require('through2').obj
 
@@ -171,7 +171,7 @@ function createCallTraceTransform() {
 }
 
 
-// from ethereumjs-vm
+// from icjs-vm
 function memLoad(memory, offset, length) {
   const loaded = memory.slice(offset, offset + length)
   // fill the remaining lenth with zeros
