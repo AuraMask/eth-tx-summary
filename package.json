@@ -1,11 +1,9 @@
 {
   "name": "irc-tx-summary",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "replay a historical tx using a webu provider as a data source",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "IrChain Team <contact@irchian.io>",
   "license": "ISC",
   "dependencies": {
@@ -16,9 +14,9 @@
     "end-of-stream": "^1.1.0",
     "irc-query": "^0.0.1",
     "icjs-util": "^0.0.1",
-    "icjs-block": "git+https://github.com/icjs/icjs-block.git",
-    "icjs-tx": "git+https://github.com/icjs/icjs-tx.git",
-    "icjs-vm": "git+https://github.com/icjs/icjs-vm.git",
+    "icjs-block": "^0.0.1",
+    "icjs-tx": "^0.0.2",
+    "icjs-vm": "^0.0.2",
     "through2": "^2.0.3",
     "treeify": "^1.0.1"
   },
